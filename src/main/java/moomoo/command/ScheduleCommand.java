@@ -45,13 +45,15 @@ public class ScheduleCommand extends Command {
         if (input.length() == 13 && input.contains("list")) {
             Iterator calIt = calendar.calendar.entrySet().iterator();
             String output = "Scheduled Payments\n";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
             Map<Date, ArrayList<String>> sorted = new TreeMap<>();
             while (calIt.hasNext()) {
                 Map.Entry entry = (Map.Entry)calIt.next();
                 String sdate = (String) entry.getKey();
+                System.out.println("String: " + sdate);
                 try {
                     Date date = formatter.parse(sdate);
+                    System.out.println("first date: " + date );
                     @SuppressWarnings("unchecked")
                     ArrayList<String> schedules = (ArrayList<String>) entry.getValue();
                     sorted.put(date,schedules);
@@ -64,7 +66,8 @@ public class ScheduleCommand extends Command {
             while (sortIt.hasNext()) {
                 Map.Entry entry = (Map.Entry)sortIt.next();
                 Date date = (Date) entry.getKey();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy");
+                System.out.println("date: " + date);
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yy");
                 String sdate = df.format(date);
                 output += sdate + "\n";
                 @SuppressWarnings("unchecked")
